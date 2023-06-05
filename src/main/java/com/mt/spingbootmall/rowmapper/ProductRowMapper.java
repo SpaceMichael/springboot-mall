@@ -1,5 +1,6 @@
 package com.mt.spingbootmall.rowmapper;
 
+import com.mt.spingbootmall.constant.ProductCategory;
 import com.mt.spingbootmall.mdoel.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,7 +16,18 @@ public class ProductRowMapper implements RowMapper <Product>{
 
         product.setProductId(rs.getInt("product_id"));
         product.setProductName(rs.getString("product_name"));
-        product.setCategory(rs.getString("category"));
+
+
+        String categorySTr = rs.getString("category");
+        ProductCategory category=ProductCategory.valueOf(categorySTr);
+        product.setCategory(category);
+
+        // advance coding
+        // product.setCategory(ProductCategory.valueOf(rs.getString("category")));
+        // old coding
+        // product.setCategory(rs.getString("category"));
+
+
         product.setImageUrl(rs.getString("image_url"));
         product.setPrice(rs.getInt("price"));
         product.setStock(rs.getInt("stock"));
